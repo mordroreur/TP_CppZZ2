@@ -1,5 +1,5 @@
-#ifndef _H_HEADER_RECTANGLE_
-#define _H_HEADER_RECTANGLE_
+#ifndef H_HEADER_RECTANGLE_FILROUGE_01_12_23
+#define H_HEADER_RECTANGLE_FILROUGE_01_12_23
 
 #include <iostream>
 
@@ -9,14 +9,17 @@ private :
   int y;
   int w;
   int h;
+  int ordre;
 public :
   Rectangle();
   Rectangle(int, int, int, int);
   std::string toString();
+  int getOrdre();
+  void setOrdre(int);
 };
 
 
 
 
 
-#endif /*_H_HEADER_RECTANGLE_*/
+#endif /*H_HEADER_RECTANGLE_FILROUGE_01_12_23*/
