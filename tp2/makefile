@@ -27,7 +27,7 @@ clean:
 	rm -rf build core *.gch
 
 mrproper: clean
-	rm -rf $(EXEC)
+	rm $(EXEC)
 	rm -rf compile_commands.json
 	rm -rf .clangd
 
