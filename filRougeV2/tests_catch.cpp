@@ -6,6 +6,7 @@
 #include "Rectangle.hpp"
 #include "Cercle.hpp"
 #include "Forme.hpp"
+#include "Groupe.hpp"
 
 extern Point ORIGINE;
 
@@ -116,14 +117,52 @@ TEST_CASE("Cercle", "[Cercle]") {
    Cercle c1;
    Cercle c2(Point(2.0, 3.0), 10.0);
    
-   REQUIRE(c1.toString() == ".....");
-   REQUIRE(c2.toString() == ".....");
+   REQUIRE(c1.toString() == "CERCLE 0.000000 0.000000 0.000000 0.000000");
+   REQUIRE(c2.toString() == "CERCLE -8.000000 -7.000000 20.000000 20.000000");
+   REQUIRE(c2.getRayon() == 10.0  );
 
-   c2.setRayon(...);
-   REQUIRE(c2.getRayon()   == "..."  );
-   REQUIRE(c2.toString()   == ".....");
-   REQUIRE(c2.getLargeur() == ".....");
-   REQUIRE(c2.getHauteur() == ".....");  
+   c2.setRayon(6.5);
+   REQUIRE(c2.getRayon()   == 6.5  );
+   REQUIRE(c2.toString()   == "CERCLE -8.000000 -7.000000 13.000000 13.000000");
+   REQUIRE(c2.getLargeur() == 13 );
+   REQUIRE(c2.getHauteur() == 13);  
 
    REQUIRE(Forme::prochainId() == (compteur+2) ); 
+}
+
+TEST_CASE("Polymorphisme", "[Forme]") {
+   Forme * f1 = new Cercle;
+   Forme * f2 = new Rectangle;
+
+   REQUIRE(f1->toString() == "CERCLE 0.000000 0.000000 0.000000 0.000000");
+   REQUIRE(f2->toString() == "RECTANGLE 0.000000 0.000000 0.000000 0.000000");
+
+   delete f1;
+   delete f2;
+}
+
+TEST_CASE("Liste", "[Groupe]") {
+  Groupe g;
+  Cercle a;
+  Rectangle b;
+  g.add(&a);
+  g.add(&b);
+  REQUIRE(g.getLength()==2);
+
+  for(int i = 1; i < 10; i++){
+    g.add(&a);
+    g.add(&b);
+    REQUIRE(g.getLength()==(i+1)*2);
+  }
+
+  g.removeLast();
+  REQUIRE(g.getLength()==19);
+
+  for(int i = 9; i >= 0; i--){
+    g.removeAtIndex(i*2);
+    REQUIRE(g.getLength()==9+i);
+  }
+  
+  g.afficher();
+  
 }

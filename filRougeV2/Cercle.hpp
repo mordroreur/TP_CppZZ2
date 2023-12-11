@@ -10,7 +10,10 @@ public :
   Cercle();
   Cercle(Point, double);
   Cercle(Point, double, double);
-  std::string toString() const;
+  std::string toString() const override;
+
+  void setRayon(const float);
+  float getRayon() const;
 };
 
 

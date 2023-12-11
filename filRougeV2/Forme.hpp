@@ -1,6 +1,7 @@
 #ifndef __CPP4__FORME_HPP__
 #define __CPP4__FORME_HPP__
 
+#include <iostream>
 #include "Point.hpp"
 
 // enum COULEURS { BLANC, NOIR};
@@ -20,12 +21,19 @@ public:
   int getId() const;
   double getLargeur() const;
   double getHauteur() const;
+  void setHauteur(const double);
+  void setLargeur(const double);
   Point& getPoint();
+  Point getPoint() const;
   COULEURS getCouleur() const;
   void setX(const double);
   void setY(const double);
   void setCouleur(const COULEURS);
-  static int prochainId(); 
+
+  virtual std::string toString() const;
+
+  virtual ~Forme();
+  static int prochainId();
 };
 
 #endif
