@@ -1,6 +1,7 @@
 #include "Chaine.hpp"
 #include <cstring>
 #include <iostream>
+#include <new>
 #include <sstream>
 
 
@@ -66,11 +67,35 @@ std::stringstream& operator<<(std::stringstream& s, const Chaine& c){
 
 int Chaine::getCapacite() const { return capacite-1; }
 
-char * Chaine::c_str() const{
-  return tab;
+char *Chaine::c_str() const { return tab; }
+
+char& Chaine::at(const int& i){
+  if(i < 0){
+    throw Chaine::OutOfRangeException("Trop bas");
+  }else if(i > capacite){
+    throw std::bad_alloc();
+  }
+  return tab[i];
+}
+
+char& Chaine::operator[](const int& i){
+  if(i < 0){
+    throw Chaine::OutOfRangeException("Trop bas");
+  }else if(i > capacite){
+    throw std::bad_alloc();
+  }
+  return tab[i];
 }
 
 
 Chaine::~Chaine(){
   delete [] tab;
+}
+
+
+Chaine::OutOfRangeException::OutOfRangeException(std::string msg) : message(msg) {}
+
+
+std::string Chaine::OutOfRangeException::what () {
+  return message;
 }

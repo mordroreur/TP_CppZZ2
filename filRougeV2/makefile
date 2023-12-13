@@ -7,7 +7,7 @@ EXE=main
 
 MACOS=
 #MACOS=-isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
-CXXFLAGS+=-Wall -Wextra -MMD -g -O2 -fdiagnostics-color=auto $(MACOS)#-fsanitize=thread
+CXXFLAGS+=-Wall -Wextra -MMD -g -O2 -fdiagnostics-color=auto $(MACOS) -Wshadow #-fsanitize=thread
 LDFLAGS= $(MACOS)#-lSDL $(shell sdl2-config --cflags --libs) -lm -lSDL2_ttf -lSDL2_mixer -lpthread -D_REENTRANT -lSDL2_image 
 
 OBJ=$(addprefix build/,$(SRC:.cpp=.o))

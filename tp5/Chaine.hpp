@@ -1,6 +1,7 @@
 #ifndef CPP5__CHAINE_HPP
 #define CPP5__CHAINE_HPP
 
+#include <exception>
 #include <iostream>
 #include <fstream>
 
@@ -19,8 +20,18 @@ public :
   void afficher(std::stringstream&) const;
   int getCapacite() const;
   char * c_str() const;
-
+  char& at(const int& );
+  char& operator[](const int&); 
   ~Chaine();
+
+  
+  class OutOfRangeException : public std::exception{
+    private:
+    std::string message;
+    public:
+    OutOfRangeException(std::string);
+    std::string what();
+  };
 };
 
 #endif
